@@ -1,7 +1,7 @@
 import { Prisma } from "../../../../generated/prisma";
 
 import httpStatus from "http-status";
-import { TErrorSources, TGenericErrorResponse } from "../../types/error.type";
+import { TErrorSources, TGenericErrorResponse } from "../../types";
 
 const handlePrismaError = (
   err: Prisma.PrismaClientKnownRequestError | Prisma.PrismaClientValidationError

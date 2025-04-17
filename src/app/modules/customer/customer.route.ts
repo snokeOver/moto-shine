@@ -10,4 +10,7 @@ customerRotes.post(
   customerController.createCustomer
 );
 
+customerRotes.get("/", customerController.getAllCustomer);
+customerRotes.get("/:id", customerController.getSingleCustomer);
+
 export default customerRotes;
