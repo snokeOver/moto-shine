@@ -1,14 +1,13 @@
 import { prisma } from "../../utils/prisma";
 import config from "../../config";
 import { Customer, Prisma } from "../../../../generated/prisma";
-import {
-  IAllCustomer,
-  ICustomerFilteredQuery,
-  IDeletedCustomer,
-} from "./customer.interface";
+import { IAllCustomer, ICustomerFilteredQuery } from "./customer.interface";
 import { IPagination } from "../../types";
 import { paginationHelper } from "../../utils/paginationHelper";
 import { customerSearchableFields } from "./customer.constant";
+import AppError from "../../middlewares/errorHandler/appError";
+
+import httpStatus from "http-status";
 
 // Create customer
 const createCustomer = async (data: Customer) => {
@@ -27,11 +26,14 @@ const createCustomer = async (data: Customer) => {
 const getSingleCustomer = async (
   customerId: string
 ): Promise<Customer | null> => {
-  await prisma.customer.findUniqueOrThrow({
+  const foundCustomer = await prisma.customer.findUnique({
     where: {
       customerId,
     },
   });
+
+  if (!foundCustomer)
+    throw new AppError(httpStatus.NOT_FOUND, "Customer not found");
 
   const result = await prisma.customer.findUnique({
     where: {
@@ -98,11 +100,14 @@ const updateSingleCustomer = async (
   customerId: string,
   data: Partial<Customer>
 ): Promise<Customer> => {
-  await prisma.customer.findUniqueOrThrow({
+  const foundCustomer = await prisma.customer.findUnique({
     where: {
       customerId,
     },
   });
+
+  if (!foundCustomer)
+    throw new AppError(httpStatus.NOT_FOUND, "Customer not found");
 
   const result = await prisma.customer.update({
     where: {
@@ -115,11 +120,14 @@ const updateSingleCustomer = async (
 
 //Delete single admin data by id
 const deleteSingleCustomer = async (customerId: string): Promise<Customer> => {
-  await prisma.customer.findUniqueOrThrow({
+  const foundCustomer = await prisma.customer.findUnique({
     where: {
       customerId,
     },
   });
+
+  if (!foundCustomer)
+    throw new AppError(httpStatus.NOT_FOUND, "Customer not found");
 
   const result = await prisma.customer.delete({
     where: {
