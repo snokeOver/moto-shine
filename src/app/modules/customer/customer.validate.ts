@@ -10,6 +10,16 @@ const create = z.object({
     .strict(),
 });
 
+const update = z.object({
+  body: z
+    .object({
+      name: z.string().optional(),
+      phone: z.string().optional(),
+    })
+    .strict(),
+});
+
 export const validateCustomer = {
   create,
+  update,
 };

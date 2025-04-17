@@ -55,7 +55,24 @@ const getAllCustomer = tryCatchAsync(async (req, res) => {
       success: true,
       message: "Customers fetched successfully",
       data: result.data,
-      meta: result.meta,
+    },
+  });
+});
+
+//Update single admin by id
+const updateSingleCustomer = tryCatchAsync(async (req, res) => {
+  const result = await customerService.updateSingleCustomer(
+    req.params.id,
+    req.body
+  );
+
+  sendResponse({
+    res,
+    sendData: {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Customer updated successfully",
+      data: result,
     },
   });
 });
@@ -64,4 +81,5 @@ export const customerController = {
   createCustomer,
   getAllCustomer,
   getSingleCustomer,
+  updateSingleCustomer,
 };

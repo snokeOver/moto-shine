@@ -13,4 +13,10 @@ customerRotes.post(
 customerRotes.get("/", customerController.getAllCustomer);
 customerRotes.get("/:id", customerController.getSingleCustomer);
 
+customerRotes.put(
+  "/:id",
+  validateRequest(validateCustomer.update),
+  customerController.updateSingleCustomer
+);
+
 export default customerRotes;

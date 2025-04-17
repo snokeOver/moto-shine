@@ -89,8 +89,29 @@ const getAllCustomer = async (
   };
 };
 
+//Update single admin data by id
+const updateSingleCustomer = async (
+  customerId: string,
+  data: Partial<Customer>
+): Promise<Customer> => {
+  await prisma.customer.findUniqueOrThrow({
+    where: {
+      customerId,
+    },
+  });
+
+  const result = await prisma.customer.update({
+    where: {
+      customerId,
+    },
+    data,
+  });
+  return result;
+};
+
 export const customerService = {
   createCustomer,
   getAllCustomer,
   getSingleCustomer,
+  updateSingleCustomer,
 };
