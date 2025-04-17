@@ -3,22 +3,22 @@ import httpStatus from "http-status";
 
 import { Request, Response } from "express";
 import { tryCatchAsync } from "../../utils/tryCatchAsync";
+import { customerService } from "./customer.service";
 
-const createAdmin = tryCatchAsync(async (req: Request, res: Response) => {
-  // const result = await userService.createAdmin(req.body);
-  const result = null;
+const createCustomer = tryCatchAsync(async (req: Request, res: Response) => {
+  const result = await customerService.createCustomer(req.body);
 
   sendResponse({
     res,
     sendData: {
       statusCode: httpStatus.OK,
       success: true,
-      message: "User created successfully",
+      message: "Customer created successfully",
       data: result,
     },
   });
 });
 
-export const userController = {
-  createAdmin,
+export const customerController = {
+  createCustomer,
 };
