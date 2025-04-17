@@ -12,6 +12,7 @@ customerRotes.post(
 
 customerRotes.get("/", customerController.getAllCustomer);
 customerRotes.get("/:id", customerController.getSingleCustomer);
+customerRotes.delete("/:id", customerController.deleteSingleCustomer);
 
 customerRotes.put(
   "/:id",

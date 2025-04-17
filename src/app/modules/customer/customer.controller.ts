@@ -39,6 +39,7 @@ const getSingleCustomer = tryCatchAsync(async (req, res) => {
   });
 });
 
+//Get all customer
 const getAllCustomer = tryCatchAsync(async (req, res) => {
   const filteredQuery = pick(req.query, validSearchableFields);
   const pagination = pick(req.query, paginationProperties);
@@ -59,7 +60,7 @@ const getAllCustomer = tryCatchAsync(async (req, res) => {
   });
 });
 
-//Update single admin by id
+//Update single customer by id
 const updateSingleCustomer = tryCatchAsync(async (req, res) => {
   const result = await customerService.updateSingleCustomer(
     req.params.id,
@@ -77,9 +78,24 @@ const updateSingleCustomer = tryCatchAsync(async (req, res) => {
   });
 });
 
+//delete single customer by id
+const deleteSingleCustomer = tryCatchAsync(async (req, res) => {
+  const result = await customerService.deleteSingleCustomer(req.params.id);
+
+  sendResponse({
+    res,
+    sendData: {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Customer deleted successfully",
+    },
+  });
+});
+
 export const customerController = {
   createCustomer,
   getAllCustomer,
   getSingleCustomer,
   updateSingleCustomer,
+  deleteSingleCustomer,
 };

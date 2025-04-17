@@ -1,7 +1,11 @@
 import { prisma } from "../../utils/prisma";
 import config from "../../config";
 import { Customer, Prisma } from "../../../../generated/prisma";
-import { IAllCustomer, ICustomerFilteredQuery } from "./customer.interface";
+import {
+  IAllCustomer,
+  ICustomerFilteredQuery,
+  IDeletedCustomer,
+} from "./customer.interface";
 import { IPagination } from "../../types";
 import { paginationHelper } from "../../utils/paginationHelper";
 import { customerSearchableFields } from "./customer.constant";
@@ -89,7 +93,7 @@ const getAllCustomer = async (
   };
 };
 
-//Update single admin data by id
+//Update single customer data by id
 const updateSingleCustomer = async (
   customerId: string,
   data: Partial<Customer>
@@ -109,9 +113,27 @@ const updateSingleCustomer = async (
   return result;
 };
 
+//Delete single admin data by id
+const deleteSingleCustomer = async (customerId: string): Promise<Customer> => {
+  await prisma.customer.findUniqueOrThrow({
+    where: {
+      customerId,
+    },
+  });
+
+  const result = await prisma.customer.delete({
+    where: {
+      customerId,
+    },
+  });
+
+  return result;
+};
+
 export const customerService = {
   createCustomer,
   getAllCustomer,
   getSingleCustomer,
   updateSingleCustomer,
+  deleteSingleCustomer,
 };
