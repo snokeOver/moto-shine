@@ -16,7 +16,6 @@ export const globalErrorHandler: ErrorRequestHandler = (
   res,
   next
 ) => {
-  console.log(err);
   //setting default values
   let statusCode = Number(httpStatus.INTERNAL_SERVER_ERROR);
   let message = "Something went wrong!";

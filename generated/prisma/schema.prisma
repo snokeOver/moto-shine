@@ -14,13 +14,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Enums
-enum ServiceStatus {
-  pending
-  in_progress @map("in-progress")
-  done
-}
-
 model Customer {
   customerId String   @id @default(uuid())
   name       String
@@ -51,9 +44,9 @@ model ServiceRecord {
   bike      Bike   @relation(fields: [bikeId], references: [bikeId])
 
   serviceDate    DateTime
-  completionDate DateTime?
+  completionDate DateTime? @default(now())
   description    String
-  status         ServiceStatus @default(pending)
+  status         String    @default("pending")
 
   @@map("service_records")
 }
