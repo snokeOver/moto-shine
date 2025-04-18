@@ -157,6 +157,10 @@ const config = {
         "fromEnvVar": null,
         "value": "darwin",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "rhel-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -182,8 +186,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Customer {\n  customerId String   @id @default(uuid())\n  name       String\n  email      String   @unique\n  phone      String\n  createdAt  DateTime @default(now())\n  bike       Bike[]\n\n  @@map(\"customers\")\n}\n\nmodel Bike {\n  bikeId        String          @id @default(uuid())\n  brand         String\n  model         String\n  year          Int\n  serviceRecord ServiceRecord[]\n\n  customerId String\n  customer   Customer @relation(fields: [customerId], references: [customerId])\n\n  @@map(\"bikes\")\n}\n\nmodel ServiceRecord {\n  serviceId String @id @default(uuid())\n  bikeId    String\n  bike      Bike   @relation(fields: [bikeId], references: [bikeId])\n\n  serviceDate    DateTime\n  completionDate DateTime? @default(now())\n  description    String\n  status         String    @default(\"pending\")\n\n  @@map(\"service_records\")\n}\n",
-  "inlineSchemaHash": "7acefa994aa16ad39e07f97f4894705a7cacf1b70df3b97461cb8b4fbf9efc24",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../generated/prisma\"\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Customer {\n  customerId String   @id @default(uuid())\n  name       String\n  email      String   @unique\n  phone      String\n  createdAt  DateTime @default(now())\n  bike       Bike[]\n\n  @@map(\"customers\")\n}\n\nmodel Bike {\n  bikeId        String          @id @default(uuid())\n  brand         String\n  model         String\n  year          Int\n  serviceRecord ServiceRecord[]\n\n  customerId String\n  customer   Customer @relation(fields: [customerId], references: [customerId])\n\n  @@map(\"bikes\")\n}\n\nmodel ServiceRecord {\n  serviceId String @id @default(uuid())\n  bikeId    String\n  bike      Bike   @relation(fields: [bikeId], references: [bikeId])\n\n  serviceDate    DateTime\n  completionDate DateTime? @default(now())\n  description    String\n  status         String    @default(\"pending\")\n\n  @@map(\"service_records\")\n}\n",
+  "inlineSchemaHash": "4db47f9cb567a670d9704fb7540769c3b38d297327151a4031a4a45b036fcb13",
   "copyEngine": true
 }
 config.dirname = '/'

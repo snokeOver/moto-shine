@@ -21,7 +21,7 @@ This is a **Bike Servicing Management API** called **Moto Shine** built with **N
 
 ## Live Backend Link
 
-[Live Backend (e.g., Railway, Render)](https://your-backend-link.com)
+[Live Backend (e.g., Railway, Render)](https://moto-shine.vercel.app)
 
 ## Setup Guide
 
@@ -37,7 +37,7 @@ Before you start, make sure you have the following installed on your machine:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/snokeover/moto-shine.git
+   git clone https://github.com/snokeOver/moto-shine
    cd moto-shine
    ```
 2. **Install Dependencies:**
@@ -60,26 +60,6 @@ PORT=3500
 
 # Database URL
 DATABASE_URL=postgresql://USER:PASSWORD@localhost:5432/bike_servicing
-
-# Bcrypt Salt Rounds (for password hashing)
-BCRYPT_SALT_ROUNDS=10
-
-# JWT Secrets and Expiry
-
-# Access Token - Secret for signing JWT access tokens
-JWT_ACCESS_SECRET=your-access-token-secret
-JWT_ACCESS_EXPIRES_IN=1h  # e.g., "1h" for 1 hour
-
-# Refresh Token - Secret for signing JWT refresh tokens
-JWT_REFRESH_SECRET=your-refresh-token-secret
-JWT_REFRESH_EXPIRES_IN=7d  # e.g., "7d" for 7 days
-
-# OTP Token - Secret for signing OTP tokens
-JWT_OTP_SECRET=your-otp-token-secret
-
-# Password Reset Token - Secret for signing password reset tokens
-JWT_PASS_RESET_SECRET=your-pass-reset-token-secret
-JWT_PASS_RESET_EXPIRES_IN=1h  # e.g., "1h" for 1 hour
 
 ```
 

@@ -60,8 +60,8 @@ export const globalErrorHandler: ErrorRequestHandler = (
     success: false,
     status: statusCode,
     message,
-    errorSources,
-    error: err,
+    // errorSources,
+    // error: err,
     stack: config.NODE_ENV === "development" ? err?.stack : null,
   });
 
